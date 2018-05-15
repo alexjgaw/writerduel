@@ -1,4 +1,4 @@
-## Write Duel
+## Writer Duel
 ### A multiplayer word jumble
 #### Requirements:
 1. Players should be able to start a new game and be given an invitation link to share with other players (the links can be simply copy-and-pasted to other players outside the application)
