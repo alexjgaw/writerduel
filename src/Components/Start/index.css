@@ -1,0 +1,38 @@
+.start {
+  background-color: #cd7f32;
+  border: .2em ridge #b87333;
+  border-radius: .7em;
+  color: #dbd1b4;
+  cursor: pointer;
+  font-size: 3em;
+  padding: .2em .8em;
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  place-self: center;
+  user-select: none;
+  z-index: 99;
+}
+
+.start:active {
+  background-color: #b7722f;
+  border: 0.3em ridge #b87333;
+  padding: .1em .7em;
+}
+
+.press-enter {
+  display: block;
+  font-size: .4em;
+}
+
+.fade-screen {
+  background-color: rgba(19,19,21,.9);
+  display: grid;
+  grid-template-columns: 20vw auto 20vw;
+  grid-template-rows: 20vh auto 20vh;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 100;
+}
