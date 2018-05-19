@@ -1,9 +1,11 @@
 import React from 'react';
 import './index.css';
 
-const Tile = () => {
+const Tile = (props) => {
   return (
-    <h1>I'm a tile!</h1>
+    <li className="tile">
+      <p>{props.tileLetter}</p>
+    </li>
   );
 };
 

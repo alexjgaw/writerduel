@@ -1,0 +1,7 @@
+.tile-staging {
+  background-color: green;
+  height: 15vh;
+  width: 80vw;
+  position: absolute;
+  bottom: 15vh;
+}

@@ -1,1 +1,16 @@
+.tile {
+  background-color: tan;
+  border-radius: .2em;
+  display: inline-flex;
+  justify-content: center;
+  height: 11vh;
+  width: 11vh;
+  margin: 2vh 0 2vh 2vw;
+  font-size: 3.5em;
+}
 
+.tile p {
+  align-self: center;
+  margin: 0;
+  padding: 0;
+}
