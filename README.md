@@ -13,6 +13,10 @@
 
 #### Nice to have:
 * Instead of random letters, pull 9-letter words from a dictionary somewhere and sort randomly. Takes care of vowel and consonant requirement and increases chances of multiple smaller words.
+* Way better styling.
+* Including animations.
 
 #### TODO:
 Pretty much everything.
+* Keyboard input moves letters to TileStaging if event.key is present in the letters.
+* Everything to do with Firebase.
