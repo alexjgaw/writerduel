@@ -7,7 +7,7 @@ const TileHome = (props) => {
     <div className="tile-home">
       <ul>
         {(!props.letters) ?
-          <li>No letters, scuzzball.</li> :
+          null :
           props.letters.split('').map((letter, i) => {
             return (
               <Tile

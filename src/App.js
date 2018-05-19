@@ -31,7 +31,9 @@ class App extends Component {
     super(props);
     this.state = {
       gameState: 'waiting',
-      letters: 'scuzzball'
+      letters: 'scuzzball',
+      stagingLetters: '',
+      words: ['cubs','balls','bull','bulls','cub','scuzzball']
     };
   }
 
@@ -41,16 +43,42 @@ class App extends Component {
     });
   }
 
+  moveToStaging(letter) {
+    let newLetters = this.state.letters;
+    newLetters = newLetters.substring(0, newLetters.indexOf(letter)) + newLetters.substring(newLetters.indexOf(letter) + 1);
+    this.setState({
+      letters: newLetters,
+      stagingLetters: this.state.stagingLetters.concat(letter)
+    });
+  }
+
+  submitWord() {
+    let word = this.state.stagingLetters;
+    if (word && this.state.words.indexOf(word) === -1) {
+      this.setState({
+        words: this.state.words.concat([word])
+      });
+    }
+    this.setState({
+      letters: this.state.letters.concat(this.state.stagingLetters),
+      stagingLetters: ''
+    });
+  }
+
   handleKeyUp(event) {
     console.log(event.key);
-    if (event.key === 'Enter') {
+    if (this.state.gameState === 'waiting' && event.key === 'Enter') {
       this.setState({
         gameState: 'playing'
       });
-    } else if (event.key === ' ') {
+    } else if (this.state.gameState === 'playing' && event.key === 'Enter') {
+      this.submitWord();
+    } else if (this.state.gameState === 'playing' && event.key === ' ') {
       this.setState({
         letters: shuffle(this.state.letters.split('')).join('')
       });
+    } else if (this.state.gameState === 'playing' && this.state.letters.indexOf(event.key) !== -1) {
+      this.moveToStaging(event.key);
     }
   }
 
@@ -64,6 +92,8 @@ class App extends Component {
         }
         <Board
           letters={this.state.letters}
+          stagingLetters={this.state.stagingLetters}
+          words={this.state.words}
         />
 
       </div>

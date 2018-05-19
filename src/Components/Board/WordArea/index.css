@@ -1,0 +1,5 @@
+.word-area {
+  height: 70vh;
+  width: 100vh;
+  overflow-y: scroll;
+}
