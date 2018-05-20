@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
 
 import Start from './Components/Start';
 import Board from './Components/Board';
 
 import './App.css';
+
+var config = {
+    apiKey: process.env.REACT_APP_FIREBASE_API,
+    authDomain: "writer-duel.firebaseapp.com",
+    databaseURL: "https://writer-duel.firebaseio.com",
+    projectId: "writer-duel",
+    storageBucket: "writer-duel.appspot.com",
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
+  };
+  firebase.initializeApp(config);
+  const FB_GAME_STATE = firebase.database().ref('gameState');
+  const FB_LETTERS = firebase.database().ref('letters');
 
 //thank you stackoverflow
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -30,17 +43,33 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameState: 'waiting',
-      letters: 'scuzzball',
+      gameState: '',
+      letters: '',
       stagingLetters: '',
       words: []
     };
   }
 
-  handleStart() {
-    this.setState({
-      gameState: 'playing'
+  componentDidMount() {
+    FB_GAME_STATE.on('value', (snapshot) => {
+      this.setState({
+        gameState: snapshot.val()
+      });
     });
+    FB_LETTERS.on('value', (snapshot) => {
+      this.setState({
+        letters: snapshot.val()
+      });
+    });
+  }
+
+  handleStart() {
+    firebase.database().ref().update({
+      'gameState' : 'playing'
+    });
+    // this.setState({
+    //   gameState: 'playing'
+    // });
   }
 
   moveToStaging(letter) {
@@ -94,6 +123,7 @@ class App extends Component {
           letters={this.state.letters}
           stagingLetters={this.state.stagingLetters}
           words={this.state.words}
+          gameState={this.state.gameState}
         />
 
       </div>

@@ -12,6 +12,7 @@ const TileHome = (props) => {
             return (
               <Tile
                 tileLetter={letter.toUpperCase()}
+                gameState={props.gameState}
                 key={letter.toUpperCase() + i + 'TileHome'}
               />
             );

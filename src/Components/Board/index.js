@@ -13,6 +13,7 @@ const Board = (props) => {
       />
       <TileHome
         letters={props.letters}
+        gameState={props.gameState}
       />
       <TileStaging
         stagingLetters={props.stagingLetters}
