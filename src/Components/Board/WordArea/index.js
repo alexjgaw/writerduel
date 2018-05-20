@@ -12,6 +12,7 @@ const WordArea = (props) => {
               <Word
                 letters={word}
                 key={word.toUpperCase() + i + 'WordArea'}
+                extraKey={word.toUpperCase() + i + 'WordArea'}
               />
             );
           })

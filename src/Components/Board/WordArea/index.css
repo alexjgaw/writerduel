@@ -1,5 +1,7 @@
 .word-area {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: flex-start;
   height: 70vh;
-  width: 100vh;
-  overflow-y: scroll;
+  width: 100vw;
 }

@@ -33,7 +33,7 @@ class App extends Component {
       gameState: 'waiting',
       letters: 'scuzzball',
       stagingLetters: '',
-      words: ['cubs','balls','bull','bulls','cub','scuzzball']
+      words: []
     };
   }
 

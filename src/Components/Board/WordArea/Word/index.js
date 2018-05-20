@@ -10,7 +10,7 @@ const Word = (props) => {
             return (
               <Tile
                 tileLetter={letter.toUpperCase()}
-                key={letter.toUpperCase() + i + 'Word' + props.key}
+                key={letter.toUpperCase() + i + 'Word' + props.extraKey}
               />
             );
           })
