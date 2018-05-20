@@ -5,6 +5,7 @@
 2. Open command prompt in the project directory
 3. `npm install`
 4. `npm start`
+5. I guess you'd need my API key.
 #### Challenge Requirements:
 1. Players should be able to start a new game and be given an invitation link to share with other players (the links can be simply copy-and-pasted to other players outside the application)
 2. The game creator should be able to press a play button whenever they're ready, and all players should be able to compete in real-time. It's fine to assume players will not reload the page once they go to it.
