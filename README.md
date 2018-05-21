@@ -24,5 +24,9 @@
 
 #### TODO:
 Pretty much everything.
-* Keyboard input moves letters to TileStaging if event.key is present in the letters.
-* Everything to do with Firebase.
+* Implement initial prompt: Start a new game or join an existing game?
+  * If start new, create a new `game` object, push it to firebase `games` object, and provide URL to share with other players
+  * If join, copy game id into a text field, sync with that object from `games`
+* Timer
+* Waiting on other players message
+* Connect with a dictionary API to validate word submissions
