@@ -15,8 +15,10 @@ var config = {
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
   };
   firebase.initializeApp(config);
-  const FB_GAME_STATE = firebase.database().ref('gameState');
-  const FB_LETTERS = firebase.database().ref('letters');
+
+  // TODO: this will have to move once I set up the "start new game" functionality so the path isn't hardcoded
+  const FB_GAME_STATE = firebase.database().ref('games/game1/gameState');
+  const FB_LETTERS = firebase.database().ref('games/game1/letters');
 
 //thank you stackoverflow
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -64,12 +66,10 @@ class App extends Component {
   }
 
   handleStart() {
-    firebase.database().ref().update({
+    // TODO: move ref path to variable
+    firebase.database().ref('games/game1').update({
       'gameState' : 'playing'
     });
-    // this.setState({
-    //   gameState: 'playing'
-    // });
   }
 
   moveToStaging(letter) {

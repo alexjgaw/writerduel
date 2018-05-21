@@ -7,9 +7,9 @@ import lock from './lock.svg';
 const Tile = (props) => {
   return (
     <li className="tile">
-      <p>{ (props.gameState === 'playing') ?
-          props.tileLetter :
-          <img src={lock} alt="Locked"/>
+      <p>{ (props.gameState === 'waiting') ?
+          <img src={lock} alt="Locked"/> :
+          props.tileLetter
       }</p>
     </li>
   );
