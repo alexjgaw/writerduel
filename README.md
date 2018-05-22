@@ -7,7 +7,7 @@
 4. `npm start`
 5. I guess you'd need my API key.
 #### Challenge Requirements:
-1. Players should be able to start a new game and be given an invitation link to share with other players (the links can be simply copy-and-pasted to other players outside the application)
+1. [ ]Players should be able to start a new game and be given an invitation link to share with other players (the links can be simply copy-and-pasted to other players outside the application)
 2. The game creator should be able to press a play button whenever they're ready, and all players should be able to compete in real-time. It's fine to assume players will not reload the page once they go to it.
 3. Once a word is entered, it cannot be entered again by ANYONE (including other players - i.e. only the first person to enter it gets credit).
 4. The game ends after one minute.
@@ -20,7 +20,8 @@
 #### Nice to have:
 * Instead of random letters, pull 9-letter words from a dictionary somewhere and sort randomly. Takes care of vowel and consonant requirement and increases chances of multiple smaller words.
 * Way better styling.
-* Including animations.
+  * Including animations.
+* Eventually maybe use Google account authentication to keep track of users? Worth it?
 
 #### TODO:
 Pretty much everything.
@@ -30,7 +31,6 @@ Pretty much everything.
 * Set up react router to handle the URL for a specific game
 * Keep track of the players in a game.
   * For now maybe just make them input any name and make sure it's unique to that game.
-  * Eventually maybe use Google account? Worth it?
 * Timer
 * Waiting on other players message
 * Connect with a dictionary API to validate word submissions
