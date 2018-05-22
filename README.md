@@ -27,6 +27,10 @@ Pretty much everything.
 * Implement initial prompt: Start a new game or join an existing game?
   * If start new, create a new `game` object, push it to firebase `games` object, and provide URL to share with other players
   * If join, copy game id into a text field, sync with that object from `games`
+* Set up react router to handle the URL for a specific game
+* Keep track of the players in a game.
+  * For now maybe just make them input any name and make sure it's unique to that game.
+  * Eventually maybe use Google account? Worth it?
 * Timer
 * Waiting on other players message
 * Connect with a dictionary API to validate word submissions
