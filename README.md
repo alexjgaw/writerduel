@@ -24,7 +24,6 @@
 * Eventually maybe use Google account authentication to keep track of users? Worth it?
 
 #### TODO:
-Pretty much everything.
 * Implement initial prompt: Start a new game or join an existing game?
   * If start new, create a new `game` object, push it to firebase `games` object, and provide URL to share with other players
   * If join, copy game id into a text field, sync with that object from `games`
