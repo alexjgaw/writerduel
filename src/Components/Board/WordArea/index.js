@@ -10,9 +10,9 @@ const WordArea = (props) => {
           props.words.map((word, i) => {
             return (
               <Word
-                letters={word}
-                key={word.toUpperCase() + i + 'WordArea'}
-                extraKey={word.toUpperCase() + i + 'WordArea'}
+                letters={word.value}
+                key={word.value.toUpperCase() + i + 'WordArea'}
+                extraKey={word.value.toUpperCase() + i + 'WordArea'}
               />
             );
           })

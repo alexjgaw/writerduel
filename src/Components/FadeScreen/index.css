@@ -1,0 +1,12 @@
+.fade-screen {
+  background-color: rgba(19,19,21,.9);
+  display: grid;
+  grid-template-columns: 20vw auto 20vw;
+  grid-template-rows: 20vh auto 20vh;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 100;
+}

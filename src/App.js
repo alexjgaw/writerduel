@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 
-import Start from './Components/Start';
 import Board from './Components/Board';
+import FadeScreen from './Components/FadeScreen';
 
 import './App.css';
 
+// Firebase config and initialization
 var config = {
     apiKey: process.env.REACT_APP_FIREBASE_API,
     authDomain: "writer-duel.firebaseapp.com",
@@ -17,8 +18,10 @@ var config = {
   firebase.initializeApp(config);
 
   // TODO: this will have to move once I set up the "start new game" functionality so the path isn't hardcoded
-  const FB_GAME_STATE = firebase.database().ref('games/game1/gameState');
-  const FB_LETTERS = firebase.database().ref('games/game1/letters');
+  const FB_GAMES = firebase.database().ref('games');
+  const FB_GAME_STATE = firebase.database().ref(`games/game1/gameState`);
+  const FB_LETTERS = firebase.database().ref(`games/game1/letters`);
+  const FB_WORDS = firebase.database().ref(`games/game1/words`);
 
 //thank you stackoverflow
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -45,7 +48,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameState: '',
+      gameId: '',
+      gameState: 'prompt',
       letters: '',
       stagingLetters: '',
       words: []
@@ -61,6 +65,12 @@ class App extends Component {
     FB_LETTERS.on('value', (snapshot) => {
       this.setState({
         letters: snapshot.val()
+      });
+    });
+    FB_WORDS.on('value', (snapshot) => {
+      console.log(snapshot.val());
+      this.setState({
+        words: Object.values(snapshot.val())
       });
     });
   }
@@ -84,9 +94,10 @@ class App extends Component {
   submitWord() {
     let word = this.state.stagingLetters;
     if (word && this.state.words.indexOf(word) === -1) {
-      this.setState({
-        words: this.state.words.concat([word])
-      });
+      FB_WORDS.push().set({
+        'value' : word,
+        'user' : 'Alex'
+      })
     }
     this.setState({
       letters: this.state.letters.concat(this.state.stagingLetters),
@@ -97,8 +108,15 @@ class App extends Component {
   handleKeyUp(event) {
     console.log(event.key);
     if (this.state.gameState === 'waiting' && event.key === 'Enter') {
+      this.handleStart();
+    } else if (this.state.gameState === 'playing' && event.key === 'Escape') {
+      firebase.database().ref('games/game1').update({
+        'gameState' : 'prompt'
+      });
+    } else if (this.state.gameState === 'playing' && this.state.stagingLetters && event.key === 'Backspace') {
       this.setState({
-        gameState: 'playing'
+        letters: this.state.letters + this.state.stagingLetters[this.state.stagingLetters.length - 1],
+        stagingLetters: this.state.stagingLetters.substring(0,this.state.stagingLetters.length - 1)
       });
     } else if (this.state.gameState === 'playing' && event.key === 'Enter') {
       this.submitWord();
@@ -111,12 +129,25 @@ class App extends Component {
     }
   }
 
+  handleJoinGame(game) {
+    console.log('in the function');
+    FB_GAMES.once('value').then(snapshot => {
+      if (snapshot.val()[game]) {
+        this.setState({
+          gameId: game
+        });
+      }
+    });
+  }
+
   render() {
     return (
       <div className="App" onKeyUp={this.handleKeyUp.bind(this)} tabIndex="0">
-        {this.state.gameState === 'waiting' &&
-          <Start
-            onClick={this.handleStart.bind(this)}
+        {this.state.gameState !== 'playing' &&
+          <FadeScreen
+            handleStart={this.handleStart.bind(this)}
+            handleJoinGame={this.handleJoinGame.bind(this)}
+            gameState={this.state.gameState}
           />
         }
         <Board
