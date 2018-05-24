@@ -11,7 +11,7 @@
 - [x] The game creator should be able to press a play button whenever they're ready, and all players should be able to compete in real-time. It's fine to assume players will not reload the page once they go to it.
 - [x] Once a word is entered, it cannot be entered again by ANYONE (including other players - i.e. only the first person to enter it gets credit).
 - [ ] The game ends after one minute.
-- [ ] Each game has nine randomly generated letters, with a minimum of two vowels and two consonants each time.
+- [x] Each game has nine randomly generated letters, with a minimum of two vowels and two consonants each time.
 - [x] Scoring of your choice.
 - You can choose your own additional rules.
 - A dictionary reference is not necessary for this exercise.
@@ -26,7 +26,6 @@
 
 #### TODO:
 * Firebase functions
-  * Create a new word when a game is created
   * Destroy game when players are finished
 * Set up react router to handle the URL for a specific game
 * Timer

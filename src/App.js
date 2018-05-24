@@ -40,6 +40,37 @@ function shuffle(array) {
   return array;
 }
 
+// Create a string with 9 random letters with at least 2 vowels and at least 2 consonants
+function getLetters() {
+  function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
+  }
+
+  function countFrom(str, from) {
+    'use strict';
+
+    if(typeof str != 'string') {
+      return false;
+    }
+
+    const pattern = new RegExp('[' + from + ']', 'g');
+    const matches = str.match(pattern);
+    return matches != null? matches.length:0;
+  }
+
+  const vowels = 'AEIOU';
+  const consonants = 'QWRTYPSDFGHJKLZXCVBNM';
+  let str = '';
+
+  for (let i = 1; i <= 9; i++) {
+    let index = getRandomIntInclusive(0,25);
+    str += consonants.concat(vowels)[index];
+  }
+  return countFrom(str, vowels) >= 2 && countFrom(str, consonants) >= 2 ? str : getLetters();
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -91,7 +122,7 @@ class App extends Component {
     const gameRef = FB_GAMES.push();
     gameRef.set({
       'gameState' : 'waiting',
-      'letters' : 'scuzzball',
+      'letters' : getLetters(),
       'players' : {
         [user] : {
           'creator' : 'true',
