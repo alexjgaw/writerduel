@@ -5,12 +5,17 @@
   color: #dbd1b4;
   cursor: pointer;
   font-size: 3em;
+  text-align: center;
   padding: .2em .8em;
   grid-column: 2 / 3;
   grid-row: 2 / 3;
   place-self: center;
   user-select: none;
   z-index: 99;
+}
+
+.start.waiting-creator {
+  cursor: default;
 }
 
 .start:active {

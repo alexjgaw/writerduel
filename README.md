@@ -7,7 +7,7 @@
 4. `npm start`
 5. I guess you'd need my API key.
 #### Challenge Requirements:
-- [ ] Players should be able to start a new game and be given an invitation link to share with other players (the links can be simply copy-and-pasted to other players outside the application)
+- [x] Players should be able to start a new game and be given an invitation link to share with other players (the links can be simply copy-and-pasted to other players outside the application)
 - [ ] The game creator should be able to press a play button whenever they're ready, and all players should be able to compete in real-time. It's fine to assume players will not reload the page once they go to it.
 - [x] Once a word is entered, it cannot be entered again by ANYONE (including other players - i.e. only the first person to enter it gets credit).
 - [ ] The game ends after one minute.
@@ -22,14 +22,12 @@
 * Way better styling.
   * Including animations.
 * Eventually maybe use Google account authentication to keep track of users? Worth it?
+* Auto focus on App once FadeScreen unmounts so user doesn't have to click again
 
 #### TODO:
-* Implement initial prompt: Start a new game or join an existing game?
-  * If start new, create a new `game` object, push it to firebase `games` object, and provide URL to share with other players
-  * If join, copy game id into a text field, sync with that object from `games`
+* Firebase functions
+  * Create a new word when a game is created
+  * Destroy game when players are finished
 * Set up react router to handle the URL for a specific game
-* Keep track of the players in a game.
-  * For now maybe just make them input any name and make sure it's unique to that game.
 * Timer
-* Waiting on other players message
 * Connect with a dictionary API to validate word submissions
