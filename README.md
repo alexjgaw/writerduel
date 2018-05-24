@@ -8,7 +8,7 @@
 5. I guess you'd need my API key.
 #### Challenge Requirements:
 - [x] Players should be able to start a new game and be given an invitation link to share with other players (the links can be simply copy-and-pasted to other players outside the application)
-- [ ] The game creator should be able to press a play button whenever they're ready, and all players should be able to compete in real-time. It's fine to assume players will not reload the page once they go to it.
+- [x] The game creator should be able to press a play button whenever they're ready, and all players should be able to compete in real-time. It's fine to assume players will not reload the page once they go to it.
 - [x] Once a word is entered, it cannot be entered again by ANYONE (including other players - i.e. only the first person to enter it gets credit).
 - [ ] The game ends after one minute.
 - [ ] Each game has nine randomly generated letters, with a minimum of two vowels and two consonants each time.
