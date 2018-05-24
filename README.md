@@ -12,10 +12,10 @@
 - [x] Once a word is entered, it cannot be entered again by ANYONE (including other players - i.e. only the first person to enter it gets credit).
 - [ ] The game ends after one minute.
 - [ ] Each game has nine randomly generated letters, with a minimum of two vowels and two consonants each time.
-- [ ] Scoring of your choice.
-- [ ] You can choose your own additional rules.
-- [ ] A dictionary reference is not necessary for this exercise.
-- [ ] Security of any kind is NOT necessary, but we may ask you afterwards about security holes and how you'd handle them in the real world.
+- [x] Scoring of your choice.
+- You can choose your own additional rules.
+- A dictionary reference is not necessary for this exercise.
+- Security of any kind is NOT necessary, but we may ask you afterwards about security holes and how you'd handle them in the real world.
 
 #### Nice to have:
 * Instead of random letters, pull 9-letter words from a dictionary somewhere and sort randomly. Takes care of vowel and consonant requirement and increases chances of multiple smaller words.
