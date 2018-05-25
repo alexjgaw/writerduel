@@ -2,6 +2,7 @@ import React from 'react';
 import WordArea from './WordArea';
 import TileHome from './TileHome';
 import TileStaging from './TileStaging';
+import Clock from './Clock';
 
 import './index.css';
 
@@ -17,6 +18,10 @@ const Board = (props) => {
       />
       <TileStaging
         stagingLetters={props.stagingLetters}
+      />
+      <Clock
+        gameState={props.gameState}
+        handleGameOver={props.handleGameOver}
       />
     </div>
   );

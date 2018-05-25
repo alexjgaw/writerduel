@@ -144,6 +144,12 @@ class App extends Component {
     });
   }
 
+  handleGameOver() {
+    FB_GAMES.child(this.state.gameId).update({
+      'gameState' : 'over'
+    });
+  }
+
   handleSubscribe(game) {
     FB_GAMES.child(`${game}/gameState`).on('value', (snapshot) => {
       this.setState({
@@ -179,7 +185,7 @@ class App extends Component {
   submitWord() {
     const word = this.state.stagingLetters;
     const isUsed = this.state.words.filter(obj => obj.value === word).length > 0;
-    if (word && !isUsed) {
+    if (word && !isUsed && word.length >= 2) {
       FB_GAMES.child(`${this.state.gameId}/words`).push().set({
         'value' : word,
         'user' : this.state.userName
@@ -210,6 +216,7 @@ class App extends Component {
         'gameState' : 'prompt'
       });
     } else if (this.state.gameState === 'playing' && this.state.stagingLetters && key === 'BACKSPACE') {
+      // remove letter from end of staging
       this.setState({
         letters: this.state.letters + this.state.stagingLetters[this.state.stagingLetters.length - 1],
         stagingLetters: this.state.stagingLetters.substring(0,this.state.stagingLetters.length - 1)
@@ -224,6 +231,7 @@ class App extends Component {
       this.moveToStaging(key);
     }
   }
+
 
   render() {
     return (
@@ -244,6 +252,7 @@ class App extends Component {
           stagingLetters={this.state.stagingLetters}
           words={this.state.words}
           gameState={this.state.gameState}
+          handleGameOver={this.handleGameOver.bind(this)}
         />
 
       </div>

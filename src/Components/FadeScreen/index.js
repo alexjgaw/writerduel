@@ -24,6 +24,20 @@ const FadeScreen = (props) => {
           handleJoinGame={props.handleJoinGame}/>
       </div>
     );
+  } else if (props.gameState === 'over') {
+    return (
+      <div className="fade-screen">
+        <h1>GAME OVER</h1>
+        <ul>
+          {Object.values(props.players).map((player, i) => {
+            console.log(player);
+            return (
+              <li key={i + 'score'}>{player.name} : {player.score}</li>
+            );
+          })}
+        </ul>
+      </div>
+    );
   }
 };
 

@@ -1,0 +1,19 @@
+.clock {
+  background-color: darkgray;
+  height: 8vh;
+  width: 10vw;
+  position: absolute;
+  bottom: 26vh;
+  left: 45vw;
+  text-align: center;
+}
+
+.clock span {
+  font-size: 2.3em;
+  font-weight: bold;
+  line-height: 8vh;
+}
+
+.clock span + span {
+  margin-left: 0.2em;
+}

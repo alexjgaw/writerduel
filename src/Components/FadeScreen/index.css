@@ -10,3 +10,21 @@
   top: 0px;
   z-index: 100;
 }
+
+.fade-screen h1, h2 {
+  color: white;
+}
+
+.fade-screen h1 {
+  font-size: 4em;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.fade-screen ul {
+  color: white;
+  list-style: none;
+  font-size: 3em;
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
