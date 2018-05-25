@@ -49,15 +49,13 @@ function getLetters() {
   }
 
   function countFrom(str, from) {
-    'use strict';
-
-    if(typeof str != 'string') {
+    if(typeof str !== 'string') {
       return false;
     }
 
     const pattern = new RegExp('[' + from + ']', 'g');
     const matches = str.match(pattern);
-    return matches != null? matches.length:0;
+    return matches !== null? matches.length:0;
   }
 
   const vowels = 'AEIOU';
@@ -180,7 +178,6 @@ class App extends Component {
 
   submitWord() {
     const word = this.state.stagingLetters;
-    console.log(this.state.words.filter(obj => obj.value === word));
     const isUsed = this.state.words.filter(obj => obj.value === word).length > 0;
     if (word && !isUsed) {
       FB_GAMES.child(`${this.state.gameId}/words`).push().set({
@@ -204,26 +201,27 @@ class App extends Component {
   }
 
   handleKeyUp(event) {
-    if (this.state.gameState === 'waiting' && event.key === 'Enter') {
+    const key = event.key.toUpperCase();
+    if (this.state.gameState === 'waiting' && key === 'ENTER') {
       this.handleStart();
-    } else if (this.state.gameState === 'playing' && event.key === 'Escape') {
+    } else if (this.state.gameState === 'playing' && key === 'ESCAPE') {
       // TODO: Get rid of this else if block when I'm done testing
       FB_GAMES.child(this.state.gameId).update({
         'gameState' : 'prompt'
       });
-    } else if (this.state.gameState === 'playing' && this.state.stagingLetters && event.key === 'Backspace') {
+    } else if (this.state.gameState === 'playing' && this.state.stagingLetters && key === 'BACKSPACE') {
       this.setState({
         letters: this.state.letters + this.state.stagingLetters[this.state.stagingLetters.length - 1],
         stagingLetters: this.state.stagingLetters.substring(0,this.state.stagingLetters.length - 1)
       });
-    } else if (this.state.gameState === 'playing' && event.key === 'Enter') {
+    } else if (this.state.gameState === 'playing' && key === 'ENTER') {
       this.submitWord();
-    } else if (this.state.gameState === 'playing' && event.key === ' ') {
+    } else if (this.state.gameState === 'playing' && key === ' ') {
       this.setState({
         letters: shuffle(this.state.letters.split('')).join('')
       });
-    } else if (this.state.gameState === 'playing' && this.state.letters.indexOf(event.key) !== -1) {
-      this.moveToStaging(event.key);
+    } else if (this.state.gameState === 'playing' && this.state.letters.indexOf(key) !== -1) {
+      this.moveToStaging(key);
     }
   }
 
