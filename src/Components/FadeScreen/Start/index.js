@@ -12,14 +12,14 @@ const Start = (props) => {
     alert('ID copied to clipboard!');
   };
 
-  if (props.players.length === 2 && props.isCreator) {
+  if (props.players.length >= 2 && props.isCreator) {
     return (
         <div className="start" onClick={props.onClick}>
           Start
           <span className="press-enter">(Click or Press Enter)</span>
         </div>
     );
-  } else if (props.players.length === 2 && !props.isCreator) {
+  } else if (props.players.length >= 2 && !props.isCreator) {
     return (
         <div className="start waiting-creator">
           Waiting for Creator to start game
