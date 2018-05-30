@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 import Board from './Components/Board';
 import FadeScreen from './Components/FadeScreen';
@@ -72,6 +73,8 @@ function getLetters() {
 class App extends Component {
   constructor(props) {
     super(props);
+    this.appRef = React.createRef();
+    this.focusApp = this.focusApp.bind(this);
     this.state = {
       gameId: '',
       gameState: 'prompt',
@@ -83,6 +86,12 @@ class App extends Component {
       players: [],
       words: []
     };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.gameState !== 'playing' && this.state.gameState === 'playing') {
+      this.focusApp();
+    }
   }
 
   handleJoinGame(game, user) {
@@ -232,15 +241,24 @@ class App extends Component {
     }
   }
 
+  focusApp() {
+    this.appRef.current.focus();
+  }
 
   render() {
     return (
-      <div className="App" onKeyUp={this.handleKeyUp.bind(this)} tabIndex="0">
+      <div
+        className="App"
+        onKeyUp={this.handleKeyUp.bind(this)}
+        tabIndex="0"
+        ref={this.appRef}
+      >
         {this.state.gameState !== 'playing' &&
           <FadeScreen
             handleStartNewGame={this.handleStartNewGame.bind(this)}
             handleStart={this.handleStart.bind(this)}
             handleJoinGame={this.handleJoinGame.bind(this)}
+            focusApp={this.focusApp}
             gameState={this.state.gameState}
             gameId={this.state.gameId}
             isCreator={this.state.isCreator}

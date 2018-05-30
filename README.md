@@ -22,7 +22,6 @@
 * Way better styling.
   * Including animations.
 * Eventually maybe use Google account authentication to keep track of users? Worth it?
-* Auto focus on App once FadeScreen unmounts so user doesn't have to click again
 
 #### TODO:
 * Firebase functions

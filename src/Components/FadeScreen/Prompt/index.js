@@ -13,6 +13,10 @@ class Prompt extends Component {
     this.handleStartNewGame = this.handleStartNewGame.bind(this);
   }
 
+  componentDidMount() {
+    this.nameInput.focus();
+  }
+
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -52,6 +56,7 @@ class Prompt extends Component {
             placeholder="Screen Name"
             onKeyPress={this.handleKeyPress}
             onChange={this.handleInputChange}
+            ref={input => {this.nameInput = input; }}
           />
           <input
             type="text"
