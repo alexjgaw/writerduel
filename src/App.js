@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/database';
+import { verify } from 'pf-sowpods';
 
 import Board from './Components/Board';
 import FadeScreen from './Components/FadeScreen';
@@ -193,8 +194,9 @@ class App extends Component {
 
   submitWord() {
     const word = this.state.stagingLetters;
+    const isReal = verify(word);
     const isUsed = this.state.words.filter(obj => obj.value === word).length > 0;
-    if (word && !isUsed && word.length >= 2) {
+    if (word && !isUsed && isReal) {
       FB_GAMES.child(`${this.state.gameId}/words`).push().set({
         'value' : word,
         'user' : this.state.userName

@@ -6,6 +6,7 @@
     "firebase": "^5.0.3",
     "firebase-admin": "^5.12.1",
     "firebase-functions": "^1.0.3",
+    "pf-sowpods": "^1.2.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-scripts": "1.1.4"
