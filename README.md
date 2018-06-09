@@ -28,4 +28,3 @@
   * Destroy game when players are finished
 * Set up react router to handle the URL for a specific game
 * Create more user-friendly game ids
-* Connect with a dictionary API to validate word submissions
