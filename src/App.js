@@ -260,7 +260,6 @@ class App extends Component {
             handleStartNewGame={this.handleStartNewGame.bind(this)}
             handleStart={this.handleStart.bind(this)}
             handleJoinGame={this.handleJoinGame.bind(this)}
-            focusApp={this.focusApp}
             gameState={this.state.gameState}
             gameId={this.state.gameId}
             isCreator={this.state.isCreator}
