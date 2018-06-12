@@ -10,7 +10,7 @@ const FadeScreen = (props) => {
       <div className="fade-screen">
         <Start
           onClick={props.handleStart}
-          gameId={props.gameId}
+          shareId={props.shareId}
           isCreator={props.isCreator}
           players={props.players}
         />

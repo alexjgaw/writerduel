@@ -4,7 +4,7 @@ import './index.css';
 const Start = (props) => {
   const copyToClipBoard = () => {
     const textField = document.createElement('textarea');
-    textField.innerText = props.gameId;
+    textField.innerText = props.shareId;
     document.body.appendChild(textField);
     textField.select();
     document.execCommand('copy');
@@ -29,7 +29,7 @@ const Start = (props) => {
     return (
         <div className="start" onClick={copyToClipBoard}>
           Waiting for other player
-          <span className="press-enter">Click to copy Game ID: {props.gameId}</span>
+          <span className="press-enter">Click to copy Game ID: {props.shareId}</span>
         </div>
     );
   }

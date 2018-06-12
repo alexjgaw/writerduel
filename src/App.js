@@ -20,6 +20,7 @@ var config = {
 firebase.initializeApp(config);
 
 const FB_GAMES = firebase.database().ref('games');
+const FB_LASTID = firebase.database().ref('lastId');
 
 //thank you stackoverflow
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -71,6 +72,13 @@ function getLetters() {
   return countFrom(str, vowels) >= 2 && countFrom(str, consonants) >= 2 ? str : getLetters();
 }
 
+// Create current shareId from lastId
+function createId(id) {
+  const letters = id.replace(/\d/g, '');
+  const digits = +id.replace(/\D/g, '') + 1;
+  return letters + digits.toString().padStart(6, '0');
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -78,6 +86,7 @@ class App extends Component {
     this.focusApp = this.focusApp.bind(this);
     this.state = {
       gameId: '',
+      shareId: '',
       gameState: 'prompt',
       letters: '',
       stagingLetters: '',
@@ -89,6 +98,14 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    FB_LASTID.once('value').then(snapshot => {
+      this.setState({
+        shareId : createId(snapshot.val() || 'g000001')
+      });
+    });
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.gameState !== 'playing' && this.state.gameState === 'playing') {
       this.focusApp();
@@ -96,21 +113,26 @@ class App extends Component {
   }
 
   handleJoinGame(game, user) {
-    FB_GAMES.once('value').then(snapshot => {
-      if (snapshot.val()[game]) {
-        const userNames = Object.values(snapshot.val()[game].players);
+    // new way with shareId
+    FB_GAMES.orderByChild('shareId').equalTo(game).once('value').then(snapshot => {
+      document.snapshot = snapshot;
+      const gameId = snapshot.val() && Object.keys(snapshot.val())[0];
+      if (gameId) {
+        // check if user name is taken
+        const userNames = Object.values(snapshot.val()[gameId].players);
         const userMatches = userNames.filter(obj => obj.name === user);
         const userNameFree = userMatches.length === 0;
         if (!userNameFree) {
           alert('That screen name is taken in that game.');
           return;
         }
+        // if not taken, add info to local state
         this.setState({
-          gameId: game,
+          gameId,
           userName: user
         });
-
-        const playerRef = FB_GAMES.child(`${game}/players`).push();
+        // add player to database and save key locally
+        const playerRef = FB_GAMES.child(`${gameId}/players`).push();
         playerRef.set({
           'creator': 'false',
           'name': user,
@@ -119,7 +141,7 @@ class App extends Component {
         this.setState({
           playerKey: playerRef.key
         });
-        this.handleSubscribe(game);
+        this.handleSubscribe(gameId);
       } else {
         alert('That game does not exist');
       }
@@ -130,6 +152,7 @@ class App extends Component {
     const gameRef = FB_GAMES.push();
     gameRef.set({
       'gameState' : 'waiting',
+      'shareId' : this.state.shareId,
       'letters' : getLetters(),
       'players' : {
         [user] : {
@@ -140,6 +163,7 @@ class App extends Component {
       },
       'words' : ''
     });
+    FB_LASTID.set(this.state.shareId);
     this.setState({
       gameId: gameRef.key,
       playerKey: user,
@@ -261,7 +285,7 @@ class App extends Component {
             handleStart={this.handleStart.bind(this)}
             handleJoinGame={this.handleJoinGame.bind(this)}
             gameState={this.state.gameState}
-            gameId={this.state.gameId}
+            shareId={this.state.shareId}
             isCreator={this.state.isCreator}
             players={this.state.players}
           />
