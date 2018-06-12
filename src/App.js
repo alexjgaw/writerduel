@@ -113,9 +113,8 @@ class App extends Component {
   }
 
   handleJoinGame(game, user) {
-    // new way with shareId
+    // Look for a game with shareId equal to game parameter
     FB_GAMES.orderByChild('shareId').equalTo(game).once('value').then(snapshot => {
-      document.snapshot = snapshot;
       const gameId = snapshot.val() && Object.keys(snapshot.val())[0];
       if (gameId) {
         // check if user name is taken

@@ -26,5 +26,6 @@
 #### TODO:
 * Firebase functions
   * Destroy game when players are finished
-* Set up react router to handle the URL for a specific game
-* Create more user-friendly game ids
+
+#### Notes:
+* Adding the shareId was interesting. Joining a game based on the FB key was easy. I just use games/gameId as the path, check the players for the submitted user name, and if it's free go ahead and join. Once I set up the shareId (creating the next ID and updating the database lastId property was trivial) it made less sense to get the entire list of games and check whether gameId was a member, so I got to learn about firebase.database.Query. I used orderByChild and equalTo to see whether there was a game with a matching shareId, if so save the FB key to use in the subsequent operations. There were some neat gotchas. For example, I momentarily forgot that Object.keys returns an array, and so I was surprised when firebase complained of an invalid path argument. Other than that it was straightforward, just new.
