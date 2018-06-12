@@ -2,10 +2,14 @@
 ### A multiplayer word jumble
 #### Set up
 1. Clone the repository
-2. Open command prompt in the project directory
-3. `npm install`
-4. `npm start`
-5. I guess you'd need my API key.
+2. [Create a Firebase project and realtime database](https://firebase.google.com)
+3. Find your project API key and messaging sender ID, paste into .env.template
+4. Rename .env.template to .env
+5. Open command prompt in the project directory
+6. `npm install`
+7. `npm start`
+8. Go nuts
+
 #### Challenge Requirements:
 - [x] Players should be able to start a new game and be given an invitation link to share with other players (the links can be simply copy-and-pasted to other players outside the application)
 - [x] The game creator should be able to press a play button whenever they're ready, and all players should be able to compete in real-time. It's fine to assume players will not reload the page once they go to it.
