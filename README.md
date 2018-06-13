@@ -1,5 +1,8 @@
 ## Writer Duel
 ### A multiplayer word jumble
+#### Deployed
+http://writer-duel.s3-website.us-east-2.amazonaws.com/
+
 #### Set up
 1. Clone the repository
 2. [Create a Firebase project and realtime database](https://firebase.google.com)
