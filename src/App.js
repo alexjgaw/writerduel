@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/database';
-import { verify } from 'pf-sowpods';
+import { isWord } from './modules/scrabble-checker';
 
 import Board from './Components/Board';
 import FadeScreen from './Components/FadeScreen';
@@ -217,9 +217,9 @@ class App extends Component {
 
   submitWord() {
     const word = this.state.stagingLetters;
-    const isReal = verify(word);
+    const validWord = isWord(word);
     const isUsed = this.state.words.filter(obj => obj.value === word).length > 0;
-    if (word && !isUsed && isReal) {
+    if (word && !isUsed && validWord) {
       FB_GAMES.child(`${this.state.gameId}/words`).push().set({
         'value' : word,
         'user' : this.state.userName
